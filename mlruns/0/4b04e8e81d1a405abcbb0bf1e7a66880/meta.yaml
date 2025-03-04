@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/4b04e8e81d1a405abcbb0bf1e7a66880/artifacts
+end_time: 1741099787584
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4b04e8e81d1a405abcbb0bf1e7a66880
+run_name: ambitious-flea-854
+run_uuid: 4b04e8e81d1a405abcbb0bf1e7a66880
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741099786489
+status: 3
+tags: []
+user_id: prakda

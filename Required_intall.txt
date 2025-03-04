@@ -5,4 +5,4 @@ uvicorn
 pandas
 numpy
 tensorflow
-mlflow
+ 
