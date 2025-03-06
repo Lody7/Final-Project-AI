@@ -1,0 +1,6 @@
+artifact_location: file:///home/prakda/Homework_MLFlow/ML_Models/Models/mlruns/246117915827834509
+creation_time: 1741247345542
+experiment_id: '246117915827834509'
+last_update_time: 1741247345542
+lifecycle_stage: active
+name: Customer Churn Prediction

@@ -62,3 +62,4 @@ uvicorn main:app --reload
 - **POST /predict**: Predict customer churn based on the input data.
 
     Example request:
+API
