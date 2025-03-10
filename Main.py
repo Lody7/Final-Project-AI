@@ -7,15 +7,6 @@ import tensorflow as tf
 # Initialize FastAPI app
 app = FastAPI()
 
-# Disable GPU (Optional)
-tf.config.set_visible_devices([], 'GPU')  # Disable default GPU setting
-
-physical_devices = tf.config.list_physical_devices('GPU')
-if physical_devices:
-    tf.config.experimental.set_memory_growth(physical_devices[0], True)
-    print("GPU is now enabled with Metal API")
-    
-# Load your pre-trained Logistic Regression model
 try:
     logi = joblib.load("modeling/model/training/LogisticRegression.pkl")
     ann = tf.keras.models.load_model("modeling/model/training/ANN_10_Epochs.keras")
