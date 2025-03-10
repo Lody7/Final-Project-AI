@@ -1,0 +1,15 @@
+artifact_uri: file:///home/prakda/Homework_MLFlow/ML_Models/Models/mlruns/450181049644229334/036cf0476ea74221848fa666e536db28/artifacts
+end_time: 1741606063845
+entry_point_name: ''
+experiment_id: '450181049644229334'
+lifecycle_stage: active
+run_id: 036cf0476ea74221848fa666e536db28
+run_name: KNN
+run_uuid: 036cf0476ea74221848fa666e536db28
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741606062421
+status: 3
+tags: []
+user_id: prakda

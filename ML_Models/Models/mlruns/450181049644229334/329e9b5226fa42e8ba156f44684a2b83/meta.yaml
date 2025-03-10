@@ -1,0 +1,15 @@
+artifact_uri: file:///home/prakda/Homework_MLFlow/ML_Models/Models/mlruns/450181049644229334/329e9b5226fa42e8ba156f44684a2b83/artifacts
+end_time: 1741606067174
+entry_point_name: ''
+experiment_id: '450181049644229334'
+lifecycle_stage: active
+run_id: 329e9b5226fa42e8ba156f44684a2b83
+run_name: ANN_10_Epochs
+run_uuid: 329e9b5226fa42e8ba156f44684a2b83
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741606066934
+status: 4
+tags: []
+user_id: prakda

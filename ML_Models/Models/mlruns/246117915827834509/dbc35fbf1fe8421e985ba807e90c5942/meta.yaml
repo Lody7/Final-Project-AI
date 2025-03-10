@@ -1,0 +1,15 @@
+artifact_uri: file:///home/prakda/Homework_MLFlow/ML_Models/Models/mlruns/246117915827834509/dbc35fbf1fe8421e985ba807e90c5942/artifacts
+end_time: 1741429149133
+entry_point_name: ''
+experiment_id: '246117915827834509'
+lifecycle_stage: active
+run_id: dbc35fbf1fe8421e985ba807e90c5942
+run_name: LogisticRegression
+run_uuid: dbc35fbf1fe8421e985ba807e90c5942
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741429147980
+status: 4
+tags: []
+user_id: prakda

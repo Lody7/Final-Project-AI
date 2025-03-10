@@ -17,16 +17,10 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 # Initialize MLflow Experiment
-mlflow.set_experiment("Customer Churn Prediction")
+mlflow.set_experiment("Customer Churn")
 
-# ==============================
-# 📊 1. Data Preprocessing
-# ==============================
+df = pd.read_csv('/home/prakda/Homework_MLFlow/ML_Models/Dataset/Customer-Churn.csv')
 
-# Load Dataset
-df = pd.read_csv('Dataset/Customer-Churn.csv')
-
-# Drop customerID as it's not useful
 df = df.drop(columns=['customerID'], errors='ignore')
 
 # Handle missing values and convert data types
@@ -59,9 +53,9 @@ df = pd.get_dummies(df, columns=ohe_cols, drop_first=True)
 df = df.replace([np.inf, -np.inf], np.nan)
 df = df.fillna(0).astype(int)
 
-# ==============================
-# 📊 2. Feature Engineering
-# ==============================
+
+# Feature Engineering
+
 
 # Feature and Target Separation
 X = df.drop(columns=['Churn'])
@@ -73,9 +67,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Convert input_example to DataFrame for MLflow
 input_example = X_train.head(1)
 
-# ==============================
-# 🧮 3. Evaluation Function
-# ==============================
+
+# Evaluation Function
+
 
 def get_model_metrics(X_test, y_test, y_pred, model, model_name):
     # Confusion Matrix
@@ -123,32 +117,14 @@ def get_model_metrics(X_test, y_test, y_pred, model, model_name):
 
     return metrics
 
-# ==============================
-# 🤖 4. Model Training & MLflow Logging
-# ==============================
+# Model Training & MLflow Logging
+
 
 # Dictionary of all models with hyperparameters
 models = {
     "LogisticRegression": LogisticRegression(class_weight='balanced', random_state=42),
     "KNN": KNeighborsClassifier(),
-    "SVM": SVC(class_weight='balanced', probability=True, random_state=42),
-    "KernelSVM": SVC(kernel='rbf', class_weight='balanced', probability=True, random_state=42),
-    "NaiveBayes": GaussianNB(),
-    "DecisionTree": DecisionTreeClassifier(class_weight='balanced', max_depth=5, random_state=42),  # Added max_depth
-    "RandomForest": RandomForestClassifier(
-        class_weight='balanced', 
-        n_estimators=100,  # Added n_estimators
-        max_depth=10,      # Added max_depth
-        random_state=42
-    ),
-    "XGBoost": xgb.XGBClassifier(
-        use_label_encoder=False, 
-        eval_metric='logloss', 
-        n_estimators=100,  # Added n_estimators
-        max_depth=10,       # Added max_depth
-        learning_rate=0.1, 
-        random_state=42
-    )
+    "SVM": SVC(class_weight='balanced', probability=True, random_state=42)
 }
 
 # Training and Logging Loop
@@ -171,19 +147,16 @@ for model_name, model in models.items():
 
         # Log Model with Signature
         signature = infer_signature(X_train, model.predict(X_train))
-        if model_name == "XGBoost":
-            mlflow.xgboost.log_model(model, model_name, signature=signature, input_example=input_example)
-        else:
-            mlflow.sklearn.log_model(model, model_name, signature=signature, input_example=input_example)
+        mlflow.sklearn.log_model(model, model_name, signature=signature, input_example=input_example)
 
         # Save Locally
-        joblib.dump(model, f'model/training/{model_name}.pkl')
+        joblib.dump(model, f'/home/prakda/Homework_MLFlow/ML_Models/Models/trained/{model_name}.pkl')
 
         print(f"{model_name} training and logging completed.")
 
-# ==============================
-# 🤖 5. ANN Model Training (10 & 25 Epochs)
-# ==============================
+
+# ANN Model Training
+
 
 def train_ann(epochs, model_name):
     with mlflow.start_run(run_name=model_name):
@@ -191,8 +164,8 @@ def train_ann(epochs, model_name):
         model_ann = tf.keras.Sequential([
             tf.keras.layers.InputLayer(input_shape=(X_train.shape[1],)),
             tf.keras.layers.Dense(64, activation='relu'),
-            tf.keras.layers.Dense(32, activation='relu'),
-            tf.keras.layers.Dense(1, activation='sigmoid')
+            tf.keras.layers.Dense(16, activation='relu'),
+            tf.keras.layers.Dense(2, activation='sigmoid')
         ])
 
         # Compile ANN
@@ -226,11 +199,10 @@ def train_ann(epochs, model_name):
 train_ann(10, "ANN_10_Epochs")
 train_ann(25, "ANN_25_Epochs")
 
-# ==============================
-# 📊 6. MLflow UI Instructions
-# ==============================
 
-print("\n🎉 All models trained and logged to MLflow.")
+# MLflow UI Instructions
+
+print("\n All models trained and logged to MLflow.")
 print("Run the following command to launch MLflow UI:")
 print("mlflow ui")
 print("Navigate to http://127.0.0.1:5000 to view results")
